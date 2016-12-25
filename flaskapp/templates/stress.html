@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stressing Host..</title>
+</head>
+<body>
+    <h2>Stressing server CPU</h2>
+    <p>Given params</p>
+     <table>
+        <tr>
+            <td>CPU percentage: </td>
+            <td>{{Resp.GivenCPU}}</td>
+         </tr>
+         <tr>
+             <td>Timeout in secs: </td>
+             <td>{{Resp.TimeoutInSec}}</td>
+         </tr>
+     </table>
+    <br>
+    <p>Current CPU is {{Resp.PresentCPU}} %</p>
+    <p>System is in stress from {{Resp.Elapsetime}} and will be in stress for {{Resp.RemainingTime}}</p>
+    <p><a href="/refresh">Refresh reading</a></p>
+    <br>
+    <br>
+    Go to <a href="/">Home Page</a>
+</body>
+</html>
