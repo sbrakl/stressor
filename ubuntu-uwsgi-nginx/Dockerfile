@@ -15,7 +15,7 @@ RUN apt-get update && \
                     libssl-dev \
                     openssl \
                     nginx \
-		    python3.5 \
+		    python3.4 \
                     python-pip \
 		    python-dev
 
