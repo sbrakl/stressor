@@ -19,7 +19,7 @@ tar -xzf lookbusy-1.4.tar.gz
 cd lookbusy-1.4
 ./configure
 make
-make install
+sudo make install
 cd ../
 rm -rf lookbusy-1.4*
 echo
