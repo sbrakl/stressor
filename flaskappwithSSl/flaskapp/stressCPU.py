@@ -6,11 +6,12 @@ import subprocess
 import time
 import psutil
 import logging
+import socket
 
 def StressCPU(CPU, timeoutinsecs):
     IsCPUValid = IsNumber(CPU) and WithinRange(CPU, 0, 100)
     IsTimeOutValid = IsNumber(timeoutinsecs) and WithinRange(timeoutinsecs, 1, 60)
-
+    hostname = socket.gethostname()
     if (IsCPUValid and IsTimeOutValid):
         flask.session['CPU'] = CPU
         flask.session['timeOutInSecs'] = timeoutinsecs
@@ -19,7 +20,7 @@ def StressCPU(CPU, timeoutinsecs):
         fork.start()
         returnobj = GetRunInfo()
     else:
-        returnobj = type("returnObj", (object,), dict(GivenCPU=CPU, TimeoutInSec=timeoutinsecs,
+        returnobj = type("returnObj", (object,), dict(HOST=hostname, GivenCPU=CPU, TimeoutInSec=timeoutinsecs,
                                                       PresentCPU="NA", Elapsetime="NA", RemainingTime="NA"))
     return returnobj
 
@@ -66,6 +67,7 @@ def WithinRange(snum, min, max):
 
 def GetRunInfo():
     currTime = datetime.datetime.now()
+    hostname = socket.gethostname()
     # Safety check to flush session
     # Hack done, because Session pop does work in different thread in multithreading
     if 'StartTime' in flask.session:
@@ -111,7 +113,7 @@ def GetRunInfo():
         remain_time_formated = 'NA'
 
 
-    rtnobj = type("returnObj", (object,), dict(GivenCPU=session_CPU, TimeoutInSec=session_timeoutInSec,
+    rtnobj = type("returnObj", (object,), dict(HOST=hostname, GivenCPU=session_CPU, TimeoutInSec=session_timeoutInSec,
                                                PresentCPU=presentCPU, Elapsetime=elapse_time_formated,
                                                RemainingTime=remain_time_formated))
     return rtnobj
