@@ -1,0 +1,22 @@
+<html>    
+<head>    
+<title>Test server page</title>
+</head>
+<body>
+    <h1>Shabbir's Stress Testing App</h1>
+    <br>
+    <h3>You are accessing machine with</h3>
+    <p>Machine IP : {{ IP }} </p>    
+    <p>Machine Host Name : {{HOST}}</p>
+    <br>
+    <h3>Stress you application with below params</h3>
+     <form action = "/stress" method = "POST">
+         <p>CPU: <input type="number" name = "CPU" placeholder="50" /> %</p>
+         <p>Time is seconds: <input type="number" name = "timeoutInS" placeholder="30" /> seconds</p>
+         <p><input type = "submit" value = "submit" /></p>
+     </form>
+    <br>
+    <h3>Thanks for using this app!</h3>
+    <p><i>Written in Python 3.5 and Flask 1.10</i></p>
+</body>
+</html>
