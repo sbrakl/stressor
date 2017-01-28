@@ -13,7 +13,10 @@ You can find more about it at blog https://sbrakl.wordpress.com
 I had develop this app in three flavors
 
 ### flaskappwithWerkzeug
-flask stress app running on Werkzeug web server. It good for light weight concurrent loads, but bad for 5+ concurrent load
+Flask stress app running on Werkzeug web server. It good for light weight concurrent loads, but bad for 5+ concurrent load
 
 ### flaskappwithSSL
-Same as flaskappwithWerkzeug, but configure to run on SSL. It useful in scenarios, where you need to configure containers behind 
+Same as flaskappwithWerkzeug, but configure to run on SSL. It useful in scenarios, where you need to configure containers behind load balancer. This will test load balancer for SSL traffic.
+
+### flaskappwithuwsgi
+Flask app is configure to run on the uwsgi and nginx webserver. It configure to run 16 concurrent request. 
