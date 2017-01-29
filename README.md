@@ -8,7 +8,7 @@ It uses Python 3.5 and lookbusy utility to stress the docker container CPU
 
 It useful in doing load testing, autoscaling scenarios where you need to stress container CPU to test CPU based autoscaling rules
 
-You can find more about it at blog https://sbrakl.wordpress.com
+You can find more about it at blog https://sbrakl.wordpress.com/2017/01/29/stressor-the-container/
 
 I had develop this app in three flavors
 

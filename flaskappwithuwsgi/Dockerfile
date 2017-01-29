@@ -1,15 +1,18 @@
-FROM sbrakl/ubuntu-uwsgi-nginx:latest 
-MAINTAINER Shabbir Akolawala  "sbrakl@gmail.com"
+FROM tiangolo/uwsgi-nginx-flask:flask
 
-COPY . /var/stressor
-RUN cp /var/stressor/conf/stressor.conf /etc/init/
-RUN rm /etc/nginx/sites-enabled/default
-RUN cp /var/stressor/conf/nginx.conf /etc/nginx/sites-available/stressor
-RUN ln -s /etc/nginx/sites-available/stressor /etc/nginx/sites-enabled
-#CMD start stressor
-# forward request and error logs to docker log collector
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-	&& ln -sf /dev/stderr /var/log/nginx/error.log
-EXPOSE 80 443
-#CMD ["nginx", "-g", "daemon off;"]
-CMD bin/bash
+# Install lookbusy
+COPY install-lookbusy.sh /root/
+RUN /root/install-lookbusy.sh
+
+# copy over our requirements.txt file
+COPY requirements.txt /tmp/
+
+# upgrade pip and install required python packages
+RUN pip install -U pip
+RUN pip install -r /tmp/requirements.txt
+
+# copy uwsgi in /etc/uwsgi/uwsgi.ini
+COPY uwsgi.ini /etc/uwsgi/uwsgi.ini
+
+# copy over our app code
+COPY ./flaskapp /app
